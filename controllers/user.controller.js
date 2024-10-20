@@ -88,11 +88,12 @@ export const login = async (req, res) => {
     };
 
     return (
-      res.status(200).cookie("token", {
-        maxAge: 1 * 24 * 60 * 60 * 1000,
-        httpsOnly: true,
-        sameSite: "strict",
-      }).json({
+      res.status(200).cookie("token", token,{
+        maxAge:1*24*60*60*1000,
+        httpsOnly:true,
+        sameSite:'strict'
+      })
+      .json({
         message: `Welcome back ${user.fullname}`,
         user,
         success: true,
@@ -124,6 +125,7 @@ export const updateProfile = async (req, res) => {
     //     success: false,
     //   });
     // }
+
     const skillsArray = skills.split(",");
     const userId = req.id;
     let user = await User.findById(userId);
